@@ -43,6 +43,7 @@ custom_styling = ["dep:ansi-str", "dep:console", "tty"]
 default = ["tty"]
 reexport_crossterm = ["tty"]
 tty = ["dep:crossterm"]
+smart_padding = []
 # ---- DEVELOPMENT FLAGS ----
 # This flag is for comfy-table development debugging!
 # You usually don't need this as a user of the library.

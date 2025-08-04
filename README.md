@@ -223,6 +223,23 @@ This feature is very convenient if you use both comfy-table and crossterm in you
 **BUT** if you enable this feature, you opt-in for breaking changes on minor/patch versions.
 Meaning, you have to update crossterm whenever you update comfy-table and you **cannot** update crossterm until comfy-table released a new version with that crossterm version.
 
+### `smart_padding` (disabled)
+
+This flag enables support for smart padding. If there is only one whitespace (border) between any of the adjacent cells of two columns, we automatically add one more whitespace between the two columns:
+
+- If the left column is left or center aligned, we add it to the end of the text in the left column.
+- If the left column is right aligned, and the right is not left aligned, we add it to the beginning of the text in the right column.
+- If the left column is right aligned and the right column is left aligned, do nothing.
+
+This feature is only applied when:
+
+- the table has dynamic arrangement
+- the columns have no existing padding
+- the vertical border line is a whitespace
+- the table has not taken the full terminal width
+
+The purpose of this feature is to improve readability when tables get too crowded.
+
 ## Contributing
 
 Comfy-table's main focus is on being minimalistic and reliable.

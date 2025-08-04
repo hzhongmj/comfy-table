@@ -40,6 +40,8 @@ pub struct Table {
     /// or whether only the text should be styled.
     #[cfg(feature = "tty")]
     pub(crate) style_text_only: bool,
+    #[cfg(feature = "smart_padding")]
+    use_smart_padding: bool,
 }
 
 impl fmt::Display for Table {
@@ -74,6 +76,8 @@ impl Table {
             enforce_styling: false,
             #[cfg(feature = "tty")]
             style_text_only: false,
+            #[cfg(feature = "smart_padding")]
+            use_smart_padding: false,
         };
 
         table.load_preset(ASCII_FULL);
@@ -403,6 +407,20 @@ impl Table {
     #[cfg(feature = "tty")]
     pub fn style_text_only(&mut self) {
         self.style_text_only = true;
+    }
+
+    /// Enable smart padding for the table.
+    #[cfg(feature = "smart_padding")]
+    pub fn set_smart_padding(&mut self, enabled: bool) -> &mut Self {
+        self.use_smart_padding = enabled;
+
+        self
+    }
+
+    /// Returns whether smart padding is enabled for the table.
+    #[cfg(feature = "smart_padding")]
+    pub fn smart_padding(&self) -> bool {
+        return self.use_smart_padding;
     }
 
     /// Convenience method to set a [ColumnConstraint] for all columns at once.

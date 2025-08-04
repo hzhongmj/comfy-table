@@ -48,7 +48,14 @@ impl ColumnDisplayInfo {
 }
 
 pub fn build_table(table: &Table) -> impl Iterator<Item = String> {
-    let display_info = arrange_content(table);
-    let content = format_content(table, &display_info);
+    let mut display_info = arrange_content(table);
+    let mut content = format_content(table, &display_info);
+
+    #[cfg(feature = "smart_padding")]
+    if table.smart_padding() {
+        use formatting::smart_padding::smart_pad_content;
+        smart_pad_content(table, &mut content, &mut display_info);
+    }
+
     draw_borders(table, &content, &display_info).into_iter()
 }

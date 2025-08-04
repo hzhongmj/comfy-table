@@ -22,6 +22,8 @@ mod simple_test;
 mod styling_test;
 mod truncation;
 mod utf_8_characters;
+#[cfg(feature = "smart_padding")]
+mod smart_padding;
 
 pub fn assert_table_line_width(table: &Table, count: usize) {
     for line in table.lines() {
